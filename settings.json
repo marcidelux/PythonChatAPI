@@ -2,5 +2,5 @@
     "serverIp"      : "192.168.0.30",
     "serverPort"    : 8888,
     "clientNameLen" : 32,
-    "pingTime"      : 100
+    "pingTime"      : 5
 }
