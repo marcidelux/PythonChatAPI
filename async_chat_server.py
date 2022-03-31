@@ -1,6 +1,7 @@
 import asyncio
 from csv import reader
 import re
+from tkinter.messagebox import NO
 from settings import AsyncChatSettings
 import logging
 from datetime import datetime
@@ -59,6 +60,11 @@ class ClientsHandler():
             return firstPart, True
         else:
             return ErrMsg["INVALID_NAME_SYNTAX"], False
+
+    async def server_broadcast(message:str)->None:
+        for name, client in ClientsHandler.clients.items():
+            client.writer.write(("Server: " + message).encode("utf-8"))
+            await client.writer.drain()
 
     async def sendServerTime(self)->None:
         # datetime object containing current date and time
@@ -199,6 +205,8 @@ class ClientsHandler():
         # Delete Client from Clients if it was added.
         if self.name in ClientsHandler.clients:
             del ClientsHandler.clients[self.name]
+        
+        await ClientsHandler.server_broadcast(f"{self.name} has left the chat")
 
 async def handle_client_request(reader:asyncio.StreamReader, writer:asyncio.StreamWriter):
     logging.info("New client requested to join the chat")
