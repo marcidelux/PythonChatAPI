@@ -212,7 +212,6 @@ async def handle_client_request(reader:asyncio.StreamReader, writer:asyncio.Stre
 
 async def main():
     server = await asyncio.start_server(handle_client_request, mSettings.serverIp, mSettings.serverPort)
-    addr = server.sockets[0].getsockname()
     print(f"Listening on IP: {mSettings.serverIp} port: {mSettings.serverPort}")
     logging.info(f"Listening on IP: {mSettings.serverIp} port: {mSettings.serverPort}")
     async with server:
