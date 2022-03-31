@@ -29,7 +29,8 @@ Commands:
 \\exit - Quits from the chat and disconnects from the server.
 \\time - Gives back the current server time
 \\priv "name" "Message" - Sends a private message to the user with "name"
-\\users - Gives a list of the current users names
+\\users - Gives a list of the current users names.
+\\help  - Prints out this small helping text.
 """.encode('utf-8')
 
 class ClientsHandler():
